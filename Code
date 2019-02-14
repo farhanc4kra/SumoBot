@@ -1,0 +1,135 @@
+
+const int leftForward = 2;
+const int leftBackward = 3;
+const int rightForward = 4;
+const int rightBackward = 5;
+const int echoPin1 = 13;
+const int trigPin1 = 12;
+const int echoPin2 = 11;
+const int trigPin2 = 10;
+const int echoPin3 = 9;
+const int trigPin3 = 8;
+const int echoPin4 = 7;
+const int trigPin4 = 6;
+const int a = A0;
+const int b = A1;
+const int c = A2;
+const int d = A3;
+
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode(leftForward , OUTPUT);
+  pinMode(leftBackward , OUTPUT);
+  pinMode(rightForward , OUTPUT);
+  pinMode(rightBackward , OUTPUT);
+  pinMode(trigPin1, OUTPUT);
+  pinMode(echoPin1, INPUT);
+  pinMode(trigPin2, OUTPUT);
+  pinMode(echoPin2, INPUT);
+  pinMode(trigPin3, OUTPUT);
+  pinMode(echoPin3, INPUT);
+  pinMode(trigPin4, OUTPUT);
+  pinMode(echoPin4, INPUT);
+  pinMode(a, INPUT);
+  pinMode(b, INPUT);
+  pinMode(c, INPUT);
+  pinMode(d, INPUT);
+ 
+}
+ 
+long durasi1 = 0;
+long durasi2 = 0;
+long durasi3 = 0;
+long durasi4 = 0;
+
+void loop()
+{
+  sensor1();
+  sensor2();
+  sensor3();
+  sensor4();
+  durasi1 = pulseIn(echoPin1, HIGH);
+  durasi2 = pulseIn(echoPin2, HIGH);
+  durasi3 = pulseIn(echoPin3, HIGH);
+  durasi4 = pulseIn(echoPin4, HIGH);
+  
+  if(durasi1 == HIGH || durasi2 == HIGH || durasi3 == HIGH || durasi4 == HIGH){
+ 		maju();
+}
+  else {
+    rotate();}
+     
+}    
+
+void sensor1(){
+       
+  	digitalWrite(trigPin1, LOW);
+  	delayMicroseconds(2);
+  	digitalWrite(trigPin1, HIGH);
+  	delayMicroseconds(10);
+  	digitalWrite(trigPin1, LOW);
+}
+     
+     
+void sensor2(){
+  
+  digitalWrite(trigPin1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin1, LOW);
+  
+}
+     
+void sensor3(){
+  
+  digitalWrite(trigPin1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin1, LOW);
+  
+}
+void sensor4(){
+  
+  digitalWrite(trigPin1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin1, LOW);
+  
+}
+  
+void berhenti(){
+  digitalWrite(leftForward , LOW);
+  digitalWrite(leftBackward , LOW);
+  digitalWrite(rightForward , LOW);
+  digitalWrite(rightBackward , LOW);
+  
+}
+
+void maju(){
+  digitalWrite(leftForward , LOW);
+  digitalWrite(leftBackward , HIGH);
+  digitalWrite(rightForward , HIGH);
+  digitalWrite(rightBackward , LOW);
+}
+
+void kanan(){
+  digitalWrite(leftForward , LOW);
+  digitalWrite(leftBackward , LOW);
+  digitalWrite(rightForward , HIGH);
+  digitalWrite(rightBackward , LOW);
+    
+}
+  
+void rotate() {
+  maju();
+  delay(6500);
+  berhenti();
+  delay(500);
+  kanan();
+  delay(6500);
+  berhenti();
+  delay(500);}
